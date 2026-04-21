@@ -362,9 +362,8 @@ function initContactMap() {
         return;
     }
 
-    const officeAddress = 'Suite 1201, Boulevard Plaza, Downtown Dubai, UAE';
-    // Fallback coordinates for Boulevard Plaza, Downtown Dubai
-    const fallbackCoords = [25.19498, 55.27458];
+    const officeAddress = 'Assurance Corp, United Arab Emirates';
+    const fallbackCoords = [24.4539, 54.3773];
 
     const map = window.L.map(mapEl, {
         zoomControl: false,
@@ -391,7 +390,7 @@ function initContactMap() {
     });
 
     const marker = window.L.marker(fallbackCoords, { icon: pinIcon }).addTo(map);
-    map.setView(fallbackCoords, 17);
+    map.setView(fallbackCoords, 6);
 
     const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(officeAddress)}`;
     fetch(geocodeUrl, { headers: { Accept: 'application/json' } })
@@ -413,7 +412,7 @@ function initContactMap() {
             }
 
             marker.setLatLng([lat, lng]);
-            map.setView([lat, lng], 17);
+            map.setView([lat, lng], 12);
         })
         .catch(() => {
             // Ignore geocoding errors and keep fallback coordinates.
@@ -565,7 +564,7 @@ function initContactForm() {
                 `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nService Interest: ${service}\n\nMessage:\n${message}`
             );
 
-            window.location.href = `mailto:hello@assurancecorp.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+            window.location.href = `mailto:info@assurance.ae?subject=${mailtoSubject}&body=${mailtoBody}`;
             setStatus('Direct submit is unavailable right now. Your email app has been opened to send the inquiry.', 'is-error');
         } finally {
             toggleSubmit(false);
